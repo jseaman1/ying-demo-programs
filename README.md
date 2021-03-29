@@ -15,7 +15,7 @@
     - ``` yarn start```
 
 
-### pure-react-ying-demo was created only with React, Javascript, and CSS.
+### pure-react-ying-demo was created only with React, Javascript, and CSS. (INCOMPLETE! DOES NOT COMPILE!)
 
 ### ionic-ying-demo is writen using the Ionic Toolkit, Typescript, and CSS.
 #### Setup:
