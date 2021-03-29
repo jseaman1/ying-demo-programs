@@ -1,5 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+const taskStyle = {
+  width: "75%",
+  marginRight: "25px",
+  padding: "15px",
+  borderRadius: "4px",
+  border: "1px solid rgb(238, 238, 238)",
+  marginLeft: "50px",
+};
 
 const ItemName = props => {
   if (props.isEditing) {
@@ -8,16 +16,11 @@ const ItemName = props => {
         type="text"
         value={props.children}
         onChange={props.handleNameEdits}
+        style={taskStyle}
       />
     );
   }
   return <span onClick={props.toggleIsEditingAt}>{props.children}</span>;
-};
-
-ItemName.propTypes = {
-  item: PropTypes.string.isRequired,
-  handleNameEdits: PropTypes.func.isRequired,
-  toggleIsEditingAt: PropTypes.func.isRequired
 };
 
 export default ItemName;

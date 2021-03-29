@@ -1,13 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-//Import Compon
 import ItemName from "./ItemName";
 import Button from "./Button";
+import RadioButton from "./RadioButton";
 
 const ListItem = props => {
   return (
     <li>
+      <RadioButton completeTask={props.completeTask}></RadioButton>
       <ItemName
         isEditing={props.isEditing}
         item={props.item}
@@ -24,13 +24,4 @@ const ListItem = props => {
     </li>
   );
 };
-
-ListItem.propTypes = {
-  item: PropTypes.string.isRequired,
-  handleRemove: PropTypes.func.isRequired,
-  toggleIsEditingAt: PropTypes.func.isRequired,
-  isEditing: PropTypes.bool.isRequired,
-  setName: PropTypes.func.isRequired
-};
-
 export default ListItem;

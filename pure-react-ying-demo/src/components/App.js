@@ -70,6 +70,20 @@ class App extends Component {
     });
   };
 
+  completeTask = id => {
+    // this.setState({
+    //   list: this.state.list.map(item => {
+    //     if (id === item.id) {
+    //       return {
+    //         ...item,
+            
+    //       };
+    //     }
+    //   })
+    // });
+    console.log("success");
+  }
+
   render() {
     return (
       <div className="wrapper">
@@ -86,6 +100,7 @@ class App extends Component {
           removeItemAt={this.removeItemAt}
           toggleIsEditingAt={this.toggleIsEditingAt}
           setNameAt={this.setNameAt}
+          completeTask={this.completeTask}
         />
       </div>
     );

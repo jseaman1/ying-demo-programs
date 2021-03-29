@@ -1,5 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+const mainInputStyle = {
+  width: "75%",
+  marginRight: "25px",
+  borderRadius: "4px",
+  border: "1px solid rgb(238, 238, 238)",
+  marginLeft: "50px",
+  align: "center"
+};
 
 const InputForm = props => {
   return (
@@ -10,18 +18,13 @@ const InputForm = props => {
         onChange={props.handleItemInput}
         value={props.pendingItem}
         placeholder="Add an item"
+        style={mainInputStyle}
       />
       <button type="submit" name="submit" value="submit">
         Add To List
       </button>
     </form>
   );
-};
-
-InputForm.propTypes = {
-  newItemSubmitHandler: PropTypes.func.isRequired,
-  handleItemInput: PropTypes.func.isRequired,
-  pendingItem: PropTypes.string.isRequired
 };
 
 export default InputForm;

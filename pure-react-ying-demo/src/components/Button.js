@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 
 const Button = props => {
   if (props.isEditing) {
@@ -14,12 +14,6 @@ const Button = props => {
       x
     </button>
   );
-};
-
-Button.propTypes = {
-  handleRemove: PropTypes.func.isRequired,
-  toggleIsEditingAt: PropTypes.func.isRequired,
-  isEditing: PropTypes.bool.isRequired
 };
 
 export default Button;
