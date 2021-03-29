@@ -1,8 +1,8 @@
 {
-  "name": "ionic-ying-demo",
+  "name": "ying-demo",
   "integrations": {
     "capacitor": {}
   },
   "type": "react",
-  "id": "7ab08989"
+  "id": "13d79c04"
 }

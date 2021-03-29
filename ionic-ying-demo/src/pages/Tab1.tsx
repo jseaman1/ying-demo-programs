@@ -1,147 +1,94 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import InputField from '../components/InputField';
-import List from '../components/List';
-import ListItem from '../components/ListItem';
-import './Tab1.css';
-import React, { useState, Component } from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonInput, IonLabel, IonButton, IonCol, IonRow} from '@ionic/react';
+import InputContainer from '../components/InputContainer';
+import React, { useState } from 'react';
+import styled from 'styled-components'
+import { Controller, useForm } from 'react-hook-form';
+import { State } from 'ionicons/dist/types/stencil-public-runtime';
 
-class Tab1 extends Component {
-  getInitialState: any
-  state = {
-    list: [],
-    pendingItem: ""
-  };
+import Input, { InputProps } from "../components/Input";
 
-  lastItemId = 0;
 
-  newItemId = () => {
-    const id = this.lastItemId;
-    this.lastItemId += 1;
-    return id;
-  };
+const Tab1: React.FC = () => {
 
-  // Flips isEditing bool
-  toggleIsEditingAt = (id: string) => {
-    console.log("isEditingAt", id);
-    this.setState({
-      list: this.state.list.map(item => {
-        if (id === item.id) {
-          return {
-            ...item,
-            isEditing: !item["isEditing"]
-          };
-        }
-        return item;
-      })
-    });
-  };
 
-  removeItemAt = (id: any) => {
-    this.setState({ list: this.state.list.filter(item => id !== item.id) });
-  };
+  const [input, setInput] = useState("");
+  const [tasks, setTasks] = useState([] as string[]);
 
-  handleItemInput = e => this.setState({ pendingItem: e.target.value });
+  const MyPage = styled(IonPage)`
+    .header {
+      background-color: darkorchid;
+    }
+    .title {
+      color: white;
+      font-size: 24px;
+      text-align: center;
+    }
+    .FieldAndButton {
+      width: 80%;
+      
+    }
 
-  // handle editing items
-  setNameAt = (name, id) => {
-    this.setState({
-      list: this.state.list.map(item => {
-        if (id === item.id) {
-          return {
-            ...item,
-            name
-          };
-        }
-        return item;
-      })
-    });
-  };
+  `;
 
-  newItemSubmitHandler = e => {
-    e.preventDefault();
-    const id = this.newItemId();
-    this.setState({
-      list: [
-        {
-          name: this.state.pendingItem,
-          isEditing: false,
-          id
-        },
-        ...this.state.list
-      ],
-      pendingItem: ""
-    });
-  };
+  const EntryField = styled(IonInput)`
+    width: 80%;
+    border: 1px solid black;
+    background-color: white;
+  
+  `;
 
-  render() {
-    return (
-      <div >
-        <IonPage>
-          <IonHeader>
-            <IonToolbar>
-              <IonTitle>Tab 1</IonTitle>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent fullscreen>
-            <IonHeader collapse="condense">
-              <IonToolbar>
-                <IonTitle size="large">Tab 1</IonTitle>
-              </IonToolbar>
-            </IonHeader>
-            <InputField
-            newItemSubmitHandler={this.newItemSubmitHandler}
-            handleItemInput={this.handleItemInput}
-            pendingItem={this.state.pendingItem}
-          />
-          </IonContent>
-        </IonPage>
-      </div>
-    );
+  function HandleNewTaskInput(newInput: string){
+    setInput(newInput);
+    console.log(input);
+  } 
+
+  function HandleNewTask(){
+    setTasks(tasks.concat(input));
+    console.log(tasks);
   }
-}
+
+
+  return (
+    <MyPage>
+      <IonHeader >
+        <IonToolbar>
+          <IonTitle>Tab 1</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+    
+      <IonContent fullscreen>
+        <div className="header">
+          <IonCol class="ion-text-center" className="title" >
+            My To Do List
+          </IonCol> 
+
+          <IonCol>
+            <IonRow className="FieldAndButton">
+                <EntryField type="text" value={input} onInput={(e: any) => HandleNewTaskInput(input)}></EntryField>
+                <IonButton onClick={() => HandleNewTask()}>Add To List</IonButton>
+            </IonRow>
+          </IonCol>
+        </div>
+
+        <div className="body">
+          <IonCol>
+            
+          </IonCol>
+        </div>
+
+          
+          
+        
+      </IonContent>
+    </MyPage>
+  );
+};
+
 export default Tab1;
 
-
-// function newItemSubmitHandler(e: { preventDefault: () => void; }){
-//   e.preventDefault();
-//   const id = this.newItemId();
-//   setState({
-//     list: [
-//       {
-//         name: state.pendingItem,
-//         isEditing: false,
-//         id
-//       },
-//       ...this.state.list
-//     ],
-//     pendingItem: ""
-//   });
-// };
-
-// const Tab1: React.FC = () => {
-  // return (
-  //   <div >
-  //     <IonPage>
-  //       <IonHeader>
-  //         <IonToolbar>
-  //           <IonTitle>Tab 1</IonTitle>
-  //         </IonToolbar>
-  //       </IonHeader>
-  //       <IonContent fullscreen>
-  //         <IonHeader collapse="condense">
-  //           <IonToolbar>
-  //             <IonTitle size="large">Tab 1</IonTitle>
-  //           </IonToolbar>
-  //         </IonHeader>
-  //         <InputForm
-  //         newItemSubmitHandler={this.newItemSubmitHandler}
-  //         handleItemInput={this.handleItemInput}
-  //         pendingItem={this.state.pendingItem}
-  //       />
-  //       </IonContent>
-  //     </IonPage>
-  //   </div>
-  // );
-// };
-
-
+// onIonChange={e => setText(e.detail.value!)}
+        {/* <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">Tab 1</IonTitle>
+          </IonToolbar>
+        </IonHeader> */}
